@@ -1,10 +1,17 @@
 service: todo-serverless
 frameworkVersion: '3'
 
+custom:
+  stage: ${opt:stage, "dev"}
+
 provider:
   name: aws
   runtime: nodejs18.x
   region: ap-southeast-1
+  deploymentBucket:
+    name: todo-serverless-aws-lambda.${self:provider.region}.deploys.${self:custom.stage}
+    maxPreviousDeploymentArtifacts: 5
+    blockPublicAccess: true
 
 functions:
   function1:
