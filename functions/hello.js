@@ -1,11 +1,12 @@
 export default function () {
-  console.log("Log hello function");
+  const appEnv = process.env.APP_ENV;
+  console.log("Log hello function", appEnv);
 
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: "Hello world",
-      appEnv: process.env.APP_ENV,
+      appEnv,
     }),
   };
 }
