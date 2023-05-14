@@ -4,7 +4,6 @@ export default function () {
   console.log("Log hello function", appEnv);
 
   return JSON.stringify({
-    statusCode: 200,
     message: "Hello world",
     appEnv,
   });
