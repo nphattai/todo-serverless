@@ -24,7 +24,7 @@ jobs:
       run: |
             cat > secrets.json << EOF
             {
-              "APP_ENV": "dev",
+              "APP_ENV": "dev"
             }
             EOF
     - run: cat secrets.json
