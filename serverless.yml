@@ -3,10 +3,13 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-plugin-typescript
-  
+  - serverless-offline
+
 custom:
   stage: ${opt:stage, "dev"}
   secrets: ${file(secrets.json)}
+  serverless-offline:
+    httpPort: 4000
 
 provider:
   name: aws
@@ -22,3 +25,7 @@ provider:
 functions:
   hello:
     handler: handlers.hello
+    events:
+      - http:
+          path: '/hello'
+          method: get
