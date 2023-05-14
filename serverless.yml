@@ -26,6 +26,6 @@ functions:
   hello:
     handler: handlers.hello
     events:
-      - http:
+      - httpApi:
           path: '/hello'
           method: get
