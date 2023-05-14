@@ -1,6 +1,9 @@
 service: todo-serverless
 frameworkVersion: '3'
 
+plugins:
+  - serverless-plugin-typescript
+  
 custom:
   stage: ${opt:stage, "dev"}
   secrets: ${file(secrets.json)}
