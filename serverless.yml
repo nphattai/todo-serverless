@@ -1,9 +1,15 @@
 service: todo-serverless
 frameworkVersion: '3'
 
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
 custom:
   stage: ${opt:stage, "dev"}
   secrets: ${file(secrets.json)}
+  serverless-offline:
+    httpPort: 4000
 
 provider:
   name: aws
@@ -19,3 +25,14 @@ provider:
 functions:
   hello:
     handler: handlers.hello
+    events:
+      - httpApi:
+          path: '/hello'
+          method: get
+
+  getTodo:
+    handler: handlers.getTodo
+    events:
+      - httpApi:
+          path: '/todo'
+          method: get

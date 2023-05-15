@@ -128,3 +128,6 @@ dist
 
 # secrects
 secrets.json
+
+# build
+.build
