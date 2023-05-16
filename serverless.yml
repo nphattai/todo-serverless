@@ -57,7 +57,7 @@ functions:
   dispatch:
     handler: handlers.dispatch
     events:
-      - httpApi:
+      - http:
           path: dispatch
           method: get
 
