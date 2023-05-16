@@ -1,9 +1,9 @@
 import { SQSHandler } from "aws-lambda";
 
-export const handleMyQueue: SQSHandler = (event, context) => {
-  console.log("handleMyQueue");
-
+export const handleMyQueue: SQSHandler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
+
+  console.log("handleMyQueue");
 
   try {
     for (const record of event.Records) {

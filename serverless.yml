@@ -58,13 +58,14 @@ functions:
     handler: handlers.dispatch
     events:
       - httpApi:
-          path: '/dispatch'
+          path: dispatch
           method: get
-  
+
   handleMyQueue:
     handler: handlers.handleMyQueue
     events:
-      - sqs: arn:aws:sqs:${self:custom.secrets.SNS_REGION}:${self:custom.secrets.SNS_ACCOUNT}:${self:custom.stage}-MyQueue
+      - sqs:
+          arn: arn:aws:sqs:${self:custom.secrets.SNS_REGION}:${self:custom.secrets.SNS_ACCOUNT}:${self:custom.stage}-MyQueue
 
   consume:
     handler: handlers.consume
