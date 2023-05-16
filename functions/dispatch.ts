@@ -5,4 +5,6 @@ export const dispatch: APIGatewayProxyHandlerV2 = (event, context) => {
   // publishSNS({ msg: "dispatch my topic" }, "MyTopic");
 
   publishSQS({ msg: "push message" }, "MyQueue");
+
+  return;
 };
