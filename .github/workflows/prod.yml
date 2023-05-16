@@ -27,7 +27,11 @@ jobs:
       run: |
             cat > secrets.json << EOF
             {
-              "APP_ENV": "production"
+              "APP_ENV": "production",
+              "SNS_REGION": "${{ secrets.SNS_REGION }}",
+              "SNS_KEY": "${{ secrets.SNS_KEY }}",
+              "SNS_SECRET": "${{ secrets.SNS_SECRET }}",
+              "SNS_ACCOUNT": "${{ secrets.SNS_ACCOUNT }}",
             }
             EOF
     - run: cat secrets.json
