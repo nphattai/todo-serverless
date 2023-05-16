@@ -3,8 +3,9 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-plugin-typescript
-  - serverless-offline
   - serverless-offline-sns
+  - serverless-offline-sqs
+  - serverless-offline
 
 custom:
   stage: ${opt:stage, "dev"}
@@ -15,6 +16,12 @@ custom:
     port: 4002 # a free port for the sns server to run on
     debug: false
     accountId: ${self:custom.secrets.SNS_ACCOUNT}
+  serverless-offline-sqs:
+    autoCreate: true # Create queue if not exists
+    apiVersion: "2012-11-05"
+    endpoint: http://0.0.0.0:9324 # This is the enpoint of our ElasticMQ container
+    region: ap-southeast-1
+    skipCacheInvalidation: false
 
 provider:
   name: aws
@@ -51,11 +58,18 @@ functions:
     handler: handlers.dispatch
     events:
       - httpApi:
-          path: '/dispatch'
+          path: dispatch
           method: get
-  
+
+  handleMyQueue:
+    handler: handlers.handleMyQueue
+    events:
+      - sqs:
+          arn: arn:aws:sqs:${self:custom.secrets.SNS_REGION}:${self:custom.secrets.SNS_ACCOUNT}:${self:custom.stage}-MyQueue
+
   consume:
     handler: handlers.consume
     description: Consume MyTopic  - Subscriber
     events:
       - sns: ${self:custom.stage}-MyTopic
+
